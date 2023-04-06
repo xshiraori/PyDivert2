@@ -1,6 +1,6 @@
 # PyDivert2
 
-This isn't some shiny new project. It's more like a slightly polished version of the original PyDivert because the original author seems to have other priorities right now.
+This isn't some shiny new project. It's more like a slightly polished version of the original PyDivert because the original author seems to have other priorities right now and the project is not up-to-date with the current version of WinDivert.
 
 You can visit the original PyDivert repository and learn about its usage here: https://github.com/ffalcinelli/pydivert 
 
