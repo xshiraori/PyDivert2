@@ -13,9 +13,10 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import ctypes
 import subprocess
 import sys
-from ctypes import byref, c_uint64, c_uint, c_char, c_char_p
+from ctypes import byref, c_uint, c_char,c_char_p, c_int, c_int16, c_uint64
 
 from pydivert import windivert_dll
 from pydivert.consts import Layer, Direction, Flag
@@ -142,8 +143,12 @@ class WinDivert(object):
         """
         if self.is_open:
             raise RuntimeError("WinDivert handle is already open.")
-        self._handle = windivert_dll.WinDivertOpen(self._filter, self._layer, self._priority,
-                                                   self._flags)
+        _filter = c_char_p(self._filter)
+        _layer = c_int(self._layer)
+        _priority = c_int16(self._priority)
+        _flags = c_uint64(self._flags)
+        self._handle = windivert_dll.WinDivertOpen(_filter, _layer, _priority,
+                                                   _flags)
 
     @property
     def is_open(self):
@@ -169,7 +174,7 @@ class WinDivert(object):
         windivert_dll.WinDivertClose(self._handle)
         self._handle = None
 
-    def recv(self, bufsize=DEFAULT_PACKET_BUFFER_SIZE):
+    def recv(self, bufsize=40 + 0xFFFF):
         """
         Receives a diverted packet that matched the filter.
 
@@ -194,7 +199,11 @@ class WinDivert(object):
         packet_ = (c_char * bufsize).from_buffer(packet)
         address = windivert_dll.WinDivertAddress()
         recv_len = c_uint(0)
-        windivert_dll.WinDivertRecv(self._handle, packet_, bufsize, byref(address), byref(recv_len))
+        ret = windivert_dll.WinDivertRecv(self._handle, packet_, bufsize, byref(recv_len), byref(address))
+
+        if self._layer == Layer.SOCKET:
+            return address
+
         return Packet(
             memoryview(packet)[:recv_len.value],
             (address.IfIdx, address.SubIfIdx),
