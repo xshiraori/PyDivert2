@@ -206,8 +206,8 @@ class WinDivert(object):
 
         return Packet(
             memoryview(packet)[:recv_len.value],
-            (address.IfIdx, address.SubIfIdx),
-            Direction(address.Direction)
+            (address.Data.Network.IfIdx, address.Data.Network.SubIfIdx),
+            Direction(not address.Outbound)
         )
 
     def send(self, packet, recalculate_checksum=True):
