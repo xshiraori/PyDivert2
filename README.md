@@ -19,7 +19,6 @@ If you run into any issues or want to contribute, feel free to do so.
 You can either
 
 * Clone this repo and directly import from it.
-or
 * Install the original repo with `pip install pydivert` then change the pydivert folder with the one in this repo.
 
 Example.py
