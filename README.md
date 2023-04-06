@@ -14,7 +14,15 @@ The WinDivert binaries are also updated to their latest version (2.2.2).
 
 If you run into any issues or want to contribute, feel free to do so.
 
-### Example 
+### Installation and example
+
+You can either
+
+* Clone this repo and directly import from it.
+or
+* Install the original repo with `pip install pydivert` then change the pydivert folder with the one in this repo.
+
+Example.py
 ```python
 from pydivert import WinDivert
 from pydivert.consts import *
