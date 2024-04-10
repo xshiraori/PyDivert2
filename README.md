@@ -4,7 +4,7 @@ This isn't some shiny new project. It's more like a slightly polished version of
 
 You can visit the original PyDivert repository and learn about its usage here: https://github.com/ffalcinelli/pydivert 
 
-Also there is a great documentation available: https://pythonhosted.org/pydivert/
+Also, there is great documentation available: https://pythonhosted.org/pydivert/
 
 ## Changes
 
@@ -12,7 +12,7 @@ Not much has changed in terms of usage. It's mostly the same old stuff, but I ad
 
 The WinDivert binaries are also updated to their latest version (2.2.2).
 
-If you run into any issues or want to contribute, feel free to do so.
+If you run into any issues or want to contribute, feel free to do so. Apparently, some of the features are not working, and it might take some time for me to implement all of them.
 
 ### Installation and example
 
